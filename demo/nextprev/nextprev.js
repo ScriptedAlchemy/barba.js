@@ -1,3 +1,12 @@
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-120967034-2', 'auto');
+ga('send', 'pageview');
+
 document.addEventListener("DOMContentLoaded", function() {
   var lastElementClicked;
   var PrevLink = document.querySelector('a.prev');
@@ -16,7 +25,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
       Promise
         .all([this.newContainerLoading, this.scrollTop()])
-        .then(this.movePages.bind(this));
+        .then(this.movePages.bind(this)).then(()=>{
+          console.log(document.location.pathname);
+          ga('set', 'page', document.location.pathname);
+          ga('send', 'pageview');
+      })
     },
 
     scrollTop: function() {
